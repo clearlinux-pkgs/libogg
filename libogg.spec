@@ -4,10 +4,10 @@
 #
 Name     : libogg
 Version  : 1.3.4
-Release  : 28
+Release  : 29
 URL      : http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.xz
 Source0  : http://downloads.xiph.org/releases/ogg/libogg-1.3.4.tar.xz
-Summary  : Ogg bitstream and framing library
+Summary  : Ogg Bitstream Library Development
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: libogg-lib = %{version}-%{release}
@@ -28,7 +28,6 @@ Summary: dev components for the libogg package.
 Group: Development
 Requires: libogg-lib = %{version}-%{release}
 Provides: libogg-devel = %{version}-%{release}
-Requires: libogg = %{version}-%{release}
 Requires: libogg = %{version}-%{release}
 
 %description dev
@@ -81,6 +80,7 @@ license components for the libogg package.
 
 %prep
 %setup -q -n libogg-1.3.4
+cd %{_builddir}/libogg-1.3.4
 %patch1 -p1
 pushd ..
 cp -a libogg-1.3.4 build32
@@ -97,12 +97,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571000435
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1604887454
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FCFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
-export FFLAGS="$CFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FCFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
+export FFLAGS="$FFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 export CXXFLAGS="$CXXFLAGS -O3 -falign-functions=32 -fno-lto -fno-math-errno -fno-semantic-interposition -fno-trapping-math "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -120,6 +119,8 @@ unset PKG_CONFIG_PATH
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=haswell"
 export CXXFLAGS="$CXXFLAGS -m64 -march=haswell"
+export FFLAGS="$FFLAGS -m64 -march=haswell"
+export FCFLAGS="$FCFLAGS -m64 -march=haswell"
 export LDFLAGS="$LDFLAGS -m64 -march=haswell"
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -128,6 +129,8 @@ unset PKG_CONFIG_PATH
 pushd ../buildavx512/
 export CFLAGS="$CFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=512"
 export CXXFLAGS="$CXXFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=512"
+export FFLAGS="$FFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=512"
+export FCFLAGS="$FCFLAGS -m64 -march=skylake-avx512 -mprefer-vector-width=512"
 export LDFLAGS="$LDFLAGS -m64 -march=skylake-avx512"
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -137,16 +140,16 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 cd ../build32;
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+make %{?_smp_mflags} check || :
 cd ../buildavx2;
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+make %{?_smp_mflags} check || :
 cd ../buildavx512;
-make VERBOSE=1 V=1 %{?_smp_mflags} check || :
+make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1571000435
+export SOURCE_DATE_EPOCH=1604887454
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libogg
 cp %{_builddir}/libogg-1.3.4/COPYING %{buildroot}/usr/share/package-licenses/libogg/bc252631805cf037048f64fef562f98c2a0bdc9e
