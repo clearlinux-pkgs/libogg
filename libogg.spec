@@ -4,7 +4,7 @@
 #
 Name     : libogg
 Version  : 1.3.5
-Release  : 39
+Release  : 40
 URL      : https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz
 Source0  : https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz
 Summary  : Ogg Bitstream Library Development
