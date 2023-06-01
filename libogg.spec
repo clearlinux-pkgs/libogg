@@ -5,7 +5,7 @@
 #
 Name     : libogg
 Version  : 1.3.5
-Release  : 45
+Release  : 46
 URL      : https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz
 Source0  : https://downloads.xiph.org/releases/ogg/libogg-1.3.5.tar.xz
 Summary  : Ogg Bitstream Library Development
@@ -99,7 +99,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683046181
+export SOURCE_DATE_EPOCH=1685638895
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -Ofast -falign-functions=32 -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -fno-semantic-interposition -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -139,7 +139,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1683046181
+export SOURCE_DATE_EPOCH=1685638895
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libogg
 cp %{_builddir}/libogg-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libogg/bc252631805cf037048f64fef562f98c2a0bdc9e || :
@@ -169,7 +169,6 @@ popd
 
 %files dev
 %defattr(-,root,root,-)
-/V3/usr/lib64/libogg.so
 /usr/include/ogg/config_types.h
 /usr/include/ogg/ogg.h
 /usr/include/ogg/os_types.h
@@ -189,7 +188,6 @@ popd
 
 %files lib
 %defattr(-,root,root,-)
-/V3/usr/lib64/libogg.so.0
 /V3/usr/lib64/libogg.so.0.8.5
 /usr/lib64/libogg.so.0
 /usr/lib64/libogg.so.0.8.5
