@@ -1,1 +1,5 @@
 Configure miss: working memcmp
+Configure miss: x86_64-clr-linux-gnu-dlltool
+Configure miss: x86_64-clr-linux-gnu-mt
+Configure miss: x86_64-clr-linux-gnu-objdump
+Configure miss: x86_64-clr-linux-gnu-strip
